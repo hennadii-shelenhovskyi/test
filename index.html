@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Deep Link Redirect Test</title>
+  <script>
+    window.onload = function () {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isFacebookApp = ua.includes("FBAN") || ua.includes("FBAV");
+
+      if (isFacebookApp) {
+        // Replace this with your actual Universal Link
+        window.location.href = "https://yourdomain.com/deeplink-path";
+      } else {
+        document.getElementById("status").textContent = "Not in Facebook/Messenger app.";
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>Deep Link Redirect Test</h1>
+  <p id="status">Checking...</p>
+</body>
+</html>
