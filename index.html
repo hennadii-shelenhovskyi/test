@@ -6,11 +6,10 @@
   <script>
     window.onload = function () {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const isFacebookApp = ua.includes("FBAN") || ua.includes("FBAV");
       const isiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
       const deeplink = "https://haestr.com/index.html?horse_owner_inv=oin_9orBMWA2yil3Kkz8";
 
-      if (isiOS && isFacebookApp) {
+      if (isiOS) {
         document.getElementById("status").textContent = "You're on iOS inside Facebook or Messenger. Open in Safari:";
         document.getElementById("openLink").style.display = "inline-block";
       } else {
