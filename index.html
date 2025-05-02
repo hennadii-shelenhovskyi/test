@@ -6,11 +6,14 @@
   <script>
     window.onload = function () {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
+
       const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
       const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+      const isInAppBrowser = /FBAN|FBAV|Instagram|Line|KAKAOTALK|Snapchat|Telegram/i.test(ua);
+
       const deeplink = "https://haestr.com/index.html?horse_owner_inv=oin_9orBMWA2yil3Kkz8";
 
-      if (isIOS && !isSafari) {
+      if (isIOS && (!isSafari || isInAppBrowser)) {
         document.getElementById("status").textContent = "You're on iOS but not in Safari. Tap to open in Safari:";
         document.getElementById("openLink").style.display = "inline-block";
       } else {
@@ -38,6 +41,6 @@
 <body>
   <h1>Deep Link Redirect</h1>
   <p id="status">Checking your environment...</p>
-  <button id="openLink" onclick="openInSafari()">Open</button>
+  <button id="openLink" onclick="openInSafari()">Open in Safari</button>
 </body>
 </html>
