@@ -1,63 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Open in App</title>
+  <meta charset="UTF-8">
+  <title>Deep Link Redirect Test</title>
+  <script>
+    window.onload = function () {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isFacebookApp = ua.includes("FBAN") || ua.includes("FBAV");
+      const isiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      const deeplink = "https://haestr.com/index.html?horse_owner_inv=oin_9orBMWA2yil3Kkz8";
+
+      if (isiOS && isFacebookApp) {
+        document.getElementById("status").textContent = "You're on iOS inside Facebook or Messenger. Open in Safari:";
+        document.getElementById("openLink").style.display = "inline-block";
+      } else {
+        window.location.href = deeplink;
+      }
+    };
+  </script>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      text-align: center;
-      padding: 40px;
-      background-color: #f9f9f9;
-    }
-    .button {
-      padding: 12px 20px;
-      font-size: 16px;
-      background-color: #007aff;
+    #openLink {
+      display: none;
+      padding: 10px 15px;
+      background: #007aff;
       color: white;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .note {
-      margin-top: 20px;
-      font-size: 15px;
-      color: #555;
+      text-decoration: none;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>Open in App</h1>
-  <p id="status">Checking your browser...</p>
-  <button id="openSafariBtn" class="button" style="display:none;" onclick="openInSafari()">Open in Safari</button>
-  <p class="note" id="extraNote" style="display:none;">
-    If the app doesn't open, tap the <b>Safari</b> icon in the bottom bar and try again.
-  </p>
-
-  <script>
-    const universalLink = "https://haestr.com/index.html?horse_owner_inv=oin_9orBMWA2yil3Kkz8";
-
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return /FBAN|FBAV|Instagram|Line|Telegram|TikTok|Snapchat/i.test(ua);
-    }
-
-    function openInSafari() {
-      window.open(universalLink, "_blank");
-    }
-
-    window.onload = function () {
-      if (isInAppBrowser()) {
-        document.getElementById("status").textContent = "You're in an in-app browser. Please open this page in Safari.";
-        document.getElementById("openSafariBtn").style.display = "inline-block";
-        document.getElementById("extraNote").style.display = "block";
-      } else {
-        // Let Universal Link do its job
-        window.location.href = universalLink;
-      }
-    };
-  </script>
+  <h1>Deep Link Redirect</h1>
+  <p id="status">Checking your environment...</p>
+  <a id="openLink" href="https://haestr.com/index.html?horse_owner_inv=oin_9orBMWA2yil3Kkz8" target="_blank">Open in Safari</a>
 </body>
 </html>
